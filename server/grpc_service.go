@@ -351,6 +351,7 @@ func (s *Server) RegionHeartbeat(stream pdpb.PD_RegionHeartbeatServer) error {
 
 		storeID := request.GetLeader().GetStoreId()
 		storeLabel := strconv.FormatUint(storeID, 10)
+
 		store, err := cluster.GetStore(storeID)
 		if err != nil {
 			return err

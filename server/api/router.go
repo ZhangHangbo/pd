@@ -24,6 +24,8 @@ import (
 
 const pingAPI = "/ping"
 
+// zhanghangbo
+// Source of the controller
 func createRouter(prefix string, svr *server.Server) *mux.Router {
 	rd := render.New(render.Options{
 		IndentJSON: true,

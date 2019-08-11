@@ -423,6 +423,8 @@ func (c *coordinator) runScheduler(s *scheduleController) {
 
 	for {
 		select {
+		//zhanghangbo
+		//It maybe used to schedule region periodly
 		case <-timer.C:
 			timer.Reset(s.GetInterval())
 			if !s.AllowSchedule() {

@@ -46,7 +46,7 @@ type Client interface {
 	// The region may expire after split. Caller is responsible for caching and
 	// taking care of region change.
 	// Also it may return nil if PD finds no Region for the key temporarily,
-	// client should retry later.
+	// client should retry later.leaderLoop
 	GetRegion(ctx context.Context, key []byte) (*metapb.Region, *metapb.Peer, error)
 	// GetPrevRegion gets the previous region and its leader Peer of the region where the key is located.
 	GetPrevRegion(ctx context.Context, key []byte) (*metapb.Region, *metapb.Peer, error)

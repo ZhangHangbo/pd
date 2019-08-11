@@ -284,7 +284,8 @@ func (s *Server) campaignLeader() error {
 
 	tsTicker := time.NewTicker(updateTimestampStep)
 	defer tsTicker.Stop()
-
+	//zhanghangbo
+	//1.keep alive 2.update tso 3.lessor expire 4.server close
 	for {
 		select {
 		case _, ok := <-ch:

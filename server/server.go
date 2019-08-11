@@ -292,7 +292,7 @@ func (s *Server) isClosed() bool {
 var timeMonitorOnce sync.Once
 
 // Run runs the pd server.
-func (s *Server) Run(ctx context.Context) error {
+func (s *Server)  Run(ctx context.Context) error {
 	timeMonitorOnce.Do(func() {
 		go StartMonitor(time.Now, func() {
 			log.Error("system time jumps backward")
