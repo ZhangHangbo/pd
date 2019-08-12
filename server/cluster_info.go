@@ -517,8 +517,6 @@ func (c *clusterInfo) handleRegionHeartbeat(region *core.RegionInfo) error {
 	c.RLock()
 	origin := c.core.Regions.GetRegion(region.GetID())
 
-	//zhanghangbo
-	//If the region's epoch over the origin
 	if origin == nil {
 		for _, item := range c.core.Regions.GetOverlaps(region) {
 			if region.GetRegionEpoch().GetVersion() < item.GetRegionEpoch().GetVersion() {
@@ -530,9 +528,6 @@ func (c *clusterInfo) handleRegionHeartbeat(region *core.RegionInfo) error {
 	isWriteUpdate, writeItem := c.CheckWriteStatus(region)
 	isReadUpdate, readItem := c.CheckReadStatus(region)
 	c.RUnlock()
-
-	//zhanghangbo
-	//Here represent the class of the save to store or save to cache
 
 	// Save to storage if meta is updated.
 	// Save to cache if meta or leader is updated, or contains any down/pending peer.
@@ -597,7 +592,6 @@ func (c *clusterInfo) handleRegionHeartbeat(region *core.RegionInfo) error {
 			saveCache = true
 		}
 	}
-	//zhangh
 	if saveKV && c.storage != nil {
 		if err := c.storage.SaveRegion(region.GetMeta()); err != nil {
 			// Not successfully saved to storage is not fatal, it only leads to longer warm-up
@@ -623,8 +617,6 @@ func (c *clusterInfo) handleRegionHeartbeat(region *core.RegionInfo) error {
 	}
 
 	if saveCache {
-		//zhanghangbo
-		//This an example to write cache fisrt and write HDD then.
 		overlaps := c.core.Regions.SetRegion(region)
 		if c.storage != nil {
 			for _, item := range overlaps {
